@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Slider</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS for the slider */
+        .slider-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slider-container img {
+            object-fit: cover;
+        }
+
+        .slider-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 5px;
+            margin: 0 5px;
+            font-size: 40px;
+            color: #ff0000;
+        }
+
+        .prev-button {
+            left: 10px;
+        }
+
+        .next-button {
+            right: 10px;
+        }
+
+        .slider-dots {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .slider-dots button {
+            background-color: #e0e0e0;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 5px;
+            margin: 0 3px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .slider-dots button.active {
+            background-color: #000;
+        }
+
+        /* Media queries for responsiveness */
+        @media (max-width: 767px) {
+            .slider-container .desktop--img {
+                display: none;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .slider-container .mobile--img {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col">
+                <div class="slider-container">
+                    <div class="slider-image-container w-100 h-100">
+                        <img class="desktop--img w-100 h-100" src="./assets/Desktop-1.webp" alt="desktop Image 1">
+                        <img class="mobile--img w-100 h-100" src="./assets/mobile-1.webp" alt="mobile image 1">
+                    </div>
+                    <div class="slider-image-container w-100 h-100">
+                        <img class="desktop--img w-100 h-100" src="./assets/Desktop-2.webp" alt="desktop Image 2">
+                        <img class="mobile--img w-100 h-100" src="./assets/mobile-2.webp" alt="mobile Image 2">
+                    </div>
+                    <div class="slider-image-container w-100 h-100">
+                        <img class="desktop--img w-100 h-100" src="./assets/Desktop-3.webp" alt="desktop Image 3">
+                        <img class="mobile--img w-100 h-100" src="./assets/mobile-3.webp" alt="mobile Image 3">
+                    </div>
+                    <div class="slider-image-container w-100 h-100">
+                        <img class="desktop--img w-100 h-100" src="./assets/Desktop-4.webp" alt="desktop Image 4">
+                        <img class="mobile--img w-100 h-100" src="./assets/mobile-4.webp" alt="mobile Image 4">
+                    </div>
+                    <div class="slider-image-container w-100 h-100">
+                        <img class="desktop--img w-100 h-100" src="./assets/Desktop-5.webp" alt="desktop Image 5">
+                        <img class="mobile--img w-100 h-100" src="./assets/mobile-5.webp" alt="mobile Image 5">
+                    </div>
+                    <button class="prev-button slider-controls">&#8249;</button>
+                    <button class="next-button slider-controls">&#8250;</button>
+                    <div class="slider-dots"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // JavaScript for the slider
+        var sliderContainer = document.querySelector('.slider-container');
+        var imageContainers = Array.from(sliderContainer.getElementsByClassName('slider-image-container'));
+        var currentImage = 0;
+        var dotsContainer = document.querySelector('.slider-dots');
+        var dots = [];
+
+        function showImage(index) {
+            imageContainers.forEach(function (container, idx) {
+                if (idx === index) {
+                    container.style.display = 'block';
+                } else {
+                    container.style.display = 'none';
+                }
+            });
+            updateDots(index);
+        }
+
+        function changeImage() {
+            currentImage++;
+            if (currentImage >= imageContainers.length) {
+                currentImage = 0;
+            }
+            showImage(currentImage);
+        }
+
+        function updateDots(index) {
+            dots.forEach(function (dot, idx) {
+                if (idx === index) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        // Initialize slider
+        showImage(currentImage);
+        setInterval(changeImage, 4000); // Change slide interval (in milliseconds)
+
+        // Add event listeners for arrow buttons
+        var prevButton = document.querySelector('.prev-button');
+        var nextButton = document.querySelector('.next-button');
+
+        prevButton.addEventListener('click', function () {
+            currentImage--;
+            if (currentImage < 0) {
+                currentImage = imageContainers.length - 1;
+            }
+            showImage(currentImage);
+        });
+
+        nextButton.addEventListener('click', changeImage);
+
+        // Add event listeners for dots
+        imageContainers.forEach(function (_, idx) {
+            var dot = document.createElement('button');
+            dot.addEventListener('click', function () {
+                showImage(idx);
+            });
+            dotsContainer.appendChild(dot);
+            dots.push(dot);
+        });
+
+    </script>
+</body>
+
+</html>
