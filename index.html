@@ -5,9 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Slider</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
+        /* ---- Bootstrap Class CSS ---- */
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .mt-3 {
+            margin-top: 30px;
+        }
+
+        .w-100 {
+            width: 100%;
+        }
+
+        .h-100 {
+            height: 100%;
+        }
+
         /* Custom CSS for the slider */
+
         .slider-container {
             width: 100%;
             height: 100%;
@@ -27,10 +46,6 @@
             border: none;
             outline: none;
             cursor: pointer;
-            padding: 5px;
-            margin: 0 5px;
-            font-size: 40px;
-            color: #ff0000;
         }
 
         .prev-button {
@@ -102,15 +117,21 @@
                         <img class="desktop--img w-100 h-100" src="./assets/Desktop-5.webp" alt="desktop Image 5">
                         <img class="mobile--img w-100 h-100" src="./assets/mobile-5.webp" alt="mobile Image 5">
                     </div>
-                    <button class="prev-button slider-controls">&#8249;</button>
-                    <button class="next-button slider-controls">&#8250;</button>
+                    <button class="prev-button slider-controls">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#ff0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    <button class="next-button slider-controls">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#ff0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
                     <div class="slider-dots"></div>
                 </div>
             </div>
         </div>
     </div>
-
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
         // JavaScript for the slider
         var sliderContainer = document.querySelector('.slider-container');
